@@ -18,12 +18,12 @@
         - cidr: "10.145.5.0/24"
           az: "us-east-1a"
           resource_tags: { "Environment":"Dev", "Name" : "public_vpc_subnet", "Tier" : "Web" }
-      # route_tables:
-      #   - subnets:
-      #       - "10.145.0.5/16"
-      #     routes:
-      #       - dest: "0.0.0.0/0"
-      #         gw: igw
+      route_tables:
+        - subnets:
+            - "10.145.5.0/24"
+          routes:
+            - dest: "0.0.0.0/0"
+              gw: igw
     register: pulic_ec2_vpc
 
   - name: set fact for vpc_id
