@@ -16,5 +16,7 @@
       dns_hostnames: "yes"
     register: pulic_ec2_vpc
 
-  - name: Print pulic_ec2_vpc info
-    debug: var=pulic_ec2_vpc.vpc.cidr_block
+  - name: set fact for vpc_id
+    set_fact:
+      public_ec2_vpc_id: "{{ pulic_ec2_vpc.vpc_id }}"
+    debug: var=public_ec2_vpc_id
