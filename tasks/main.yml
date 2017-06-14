@@ -9,12 +9,11 @@
     ec2_vpc:
       state: "present"
       cidr_block: "10.145.0.0/16"
-      resource_tags: '{ "Environment" : "Dev" }'
+      resource_tags: '{ "Environment" : "Dev", "Name" : "public_ec2_vpc" }'
       internet_gateway: "true"
       region: "us-east-1"
       wait: "yes"
       dns_hostnames: "yes"
-      name: "pulic_ec2_vpc"
     register: pulic_ec2_vpc
 
   - name: Print pulic_ec2_vpc info
