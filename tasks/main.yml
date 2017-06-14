@@ -17,4 +17,4 @@
     register: pulic_ec2_vpc
 
   - name: Print pulic_ec2_vpc info
-    debug: var=pulic_ec2_vpc.vpc[0].cidr_block
+    debug: var=pulic_ec2_vpc.vpc.cidr_block
