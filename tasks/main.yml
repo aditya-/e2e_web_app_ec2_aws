@@ -19,7 +19,10 @@
       subnets:
         - cidr: "10.145.5.0/24"
           az: "us-east-1a"
-          resource_tags: { "Environment":"Dev", "Name" : "public_vpc_subnet", "Tier" : "Web" }
+          resource_tags:
+            Name: "public_vpc_subnet"
+            Tier: "web"
+            Environment: "Dev"
       route_tables:
         - subnets:
             - "10.145.5.0/24"
