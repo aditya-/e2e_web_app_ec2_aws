@@ -12,4 +12,11 @@
       resource_tags: '{ "Environment" : "Dev" }'
       internet_gateway: "true"
       region: "us-east-1"
+      wait: "yes"
+      dns_hostnames: "yes"
+      name: "pulic_ec2_vpc"
     register: pulic_ec2_vpc
+
+  - name: Print pulic_ec2_vpc info
+    debug:
+      msg: "creating vpc-id is {{ pulic_ec2_vpc }} "

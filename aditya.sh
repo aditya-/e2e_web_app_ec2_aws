@@ -1,15 +1,13 @@
 #!/bin/bash
 # created for automatic push
 commit_name=$1
-branch_name=$2
 
-if [[ -n "$commit_name" && "$branch_name" ]]; then
+if [[ -n "$commit_name" ]]; then
     git add .
     git commit -am "$1"
-    # git pull origin master
-    git push origin "$2"
+    git push origin master
 ssh ansi_aws << EOF
- cd /etc/ansible/roles/aws_automation-Multi-Tier_Application && sh pull.sh "$2"
+ cd /etc/ansible/roles/e2e_web_app_ec2_aws/ && sh pull.sh
  exit
 EOF
 else
