@@ -14,9 +14,18 @@
       region: "us-east-1"
       wait: "yes"
       dns_hostnames: "yes"
+      subnets:
+        - cidr: "10.145.0.5/16"
+          az: "us-east-1a"
+          resource_tags: '{ "Environment" : "Dev", "Name" : "public_vpc_subnet", "Tier" : "web" }'
+      route_tables:
+        - subnets:
+            - "10.145.0.5/16"
+          routes:
+            - dest: "0.0.0.0/0"
+              gw: igw
     register: pulic_ec2_vpc
 
   - name: set fact for vpc_id
     set_fact:
       public_ec2_vpc_id: "{{ pulic_ec2_vpc.vpc_id }}"
-    # debug: var=public_ec2_vpc_id
