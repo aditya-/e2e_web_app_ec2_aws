@@ -61,4 +61,4 @@
           from_port: 443
           to_port: 443
           cidr_ip: "0.0.0.0/0"
-      register: ec2_public_web_security_group
+    register: ec2_public_web_security_group
