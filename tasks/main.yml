@@ -34,3 +34,30 @@
   - name: set fact for vpc_id
     set_fact:
       public_ec2_vpc_id: "{{ pulic_ec2_vpc.vpc_id }}"
+
+  - name: Creating Security Group for web
+    ec2_group:
+      name: "ec2_public_web_security_group"
+      description: "ec2_public_web_security_group"
+      vpc_id: "{{ public_ec2_vpc_id }}"
+      region: "us-east-1"
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: "0.0.0.0/0"
+
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "10.145.0.0/16"
+
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "180.179.142.20/16"
+          
+        - proto: tcp
+          from_port: 443
+          to_port: 443
+          cidr_ip: "0.0.0.0/0"
