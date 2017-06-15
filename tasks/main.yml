@@ -65,3 +65,10 @@
     run_once: "True"
     register: ec2_public_web_security_group
 
+  - name: create key pair
+    ec2_key:
+      name: ec2_public_key_pair
+    register: ec2_public_key_pair
+
+  - debug: var=ec2_public_key_pair
+
