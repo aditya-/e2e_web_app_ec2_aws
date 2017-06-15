@@ -55,7 +55,7 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          cidr_ip: "180.179.142.20/16"
+          cidr_ip: "180.179.142.20"
 
         - proto: tcp
           from_port: 443
