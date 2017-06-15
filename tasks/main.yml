@@ -62,5 +62,6 @@
           to_port: 443
           cidr_ip: "0.0.0.0/0"
     ignore_errors: "True"
+    run_once: "True"
     register: ec2_public_web_security_group
 
