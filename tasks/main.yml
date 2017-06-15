@@ -71,5 +71,5 @@
       region: "us-east-1"
     register: ec2_public_key_pair
 
-  - debug: var=ec2_key_pair.private_key
+  - debug: var=ec2_key_pair.key.private_key
 
