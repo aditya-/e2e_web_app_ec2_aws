@@ -73,3 +73,7 @@
 
   - debug: var=ec2_key_pair.key.private_key
 
+  - name: priting_security_group info
+    debug:
+      msg: "Secuirty group info {{ ec2_public_web_security_group }}"
+
