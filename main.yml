@@ -1,3 +1,7 @@
 ---
 - name: Master playbook for end-end Automation
-  
+  hosts: localhost
+  remote_user: ubuntu
+  connection: "local"
+  roles:
+    - e2e_cloud_deploy_role_aws
