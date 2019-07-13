@@ -1,0 +1,90 @@
+# Automated Deployment of webapplication from Scratch in AWS.
+---
+- hosts: localhost
+  become: "yes"
+  gather_facts: "no"
+  connection: "local"
+  tasks:
+  # - name: Public facing VPC creation
+  #   ec2_vpc:
+  #     state: "present"
+  #     cidr_block: "{{ vpc_cidr_block }}"
+  #     resource_tags:
+  #       Name: "public_ec2_vpc"
+  #       Environment : "Dev" 
+  #     internet_gateway: "true"
+  #     region: "{{ region }}"
+  #     wait: "yes"
+  #     dns_hostnames: "yes"
+  #     subnets:
+  #       - cidr: "10.145.5.0/24"
+  #         az: "us-east-1a"
+  #         resource_tags:
+  #           Name: "public_vpc_subnet"
+  #           Tier: "web"
+  #           Environment: "Dev"
+  #     route_tables:
+  #       - subnets:
+  #           - "10.145.5.0/24"
+  #         routes:
+  #           - dest: "0.0.0.0/0"
+  #             gw: igw
+  #   register: pulic_ec2_vpc
+
+  # - name: set fact for vpc_id
+  #   set_fact:
+  #     public_ec2_vpc_id: "{{ pulic_ec2_vpc.vpc_id }}"
+
+  - name: Creating Security Group for web
+    ec2_group:
+      name: "ec2_public_web_security_group"
+      description: "ec2_public_web_security_group"
+      vpc_id: "{{ public_ec2_vpc_id }}"
+      region: "us-east-1"
+      rules:
+        - proto: tcp
+          from_port: 80
+          to_port: 80
+          cidr_ip: "0.0.0.0/0"
+
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "10.145.0.0/16"
+
+        - proto: tcp
+          from_port: 22
+          to_port: 22
+          cidr_ip: "180.179.142.20"
+
+        - proto: tcp
+          from_port: 443
+          to_port: 443
+          cidr_ip: "0.0.0.0/0"
+    ignore_errors: "True"
+    run_once: "True"
+    register: ec2_public_web_security_group
+
+  # - name: create key pair
+  #   ec2_key:
+  #     name: ec2_key_pair
+  #     region: "us-east-1"
+  #   register: ec2_key_pair
+
+  # - debug: var=ec2_key_pair.key.private_key
+
+  # - name: Launch web and app server
+  #   ec2:
+  #     key_name: "{{ ec2_key_pair }}"
+  #     instance_type: "{{ instance_type }}"
+  #     image: "{{ aws_ubuntu_image }}"
+  #     wait: "yes"
+  #     region: "{{ region }}"
+  #     aws_zone: "{{ region }}{{ aws_zone }}"
+  #     group: "{{ aws_security_group }}"
+  #     instance_tags:
+  #       Name: "web_app_server"
+  #       Environment: "dev"
+  #     exact_count: 1
+  #     count_tag: '{"Environment":"dev","Name":"web_app_server"}'
+  #   register: web_app_server
