@@ -1,4 +1,4 @@
-This Playbook Drives end-end Automation for provisioning Docker HOST machine in EC2, AWS
+This Playbook Drives end-end Automation for provisioning Docker HOST machine in AWS Cloud EC2.
 
 Playbook UP: e2e_cloud_deploy_role_aws/Docker_ec2_provisioning_playbook.yml
 
