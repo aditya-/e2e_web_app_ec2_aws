@@ -1,5 +1,5 @@
 ---
-### provision AWS EC2 instance
+### provision AWS EC2 Docker Host instance
 - hosts: localhost
   connection: local
   gather_facts: false
